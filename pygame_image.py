@@ -18,6 +18,8 @@ def main():
     kk_rct = kk_img.get_rect()  
     kk_rct.center = 300, 200  
     tmr = 0
+    mx=0
+    my=0
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: return
@@ -29,15 +31,23 @@ def main():
         screen.blit(bg_flipped_img, [-x+1600,0])
         screen.blit(bg_img, [-x+3200,0])
         screen.blit(kk_img,kk_rct)
-        kk_rct.move_ip(-1,0)
+        my=0
+        mx=0
         if key_lst[pg.K_UP]:  
-            kk_rct.move_ip((0, -1))  
+            my=-1
+            mx=0
         if key_lst[pg.K_DOWN]:  
-            kk_rct.move_ip((0, +1))  
+            my=1
+            mx=0   
         if key_lst[pg.K_LEFT]:  
-            kk_rct.move_ip((-1, 0))              
+            my=0
+            mx=-1                  
         if key_lst[pg.K_RIGHT]:  
-            kk_rct.move_ip((+2, 0))
+            my=0
+            mx=2            
+        
+        
+        kk_rct.move_ip(-1+mx,my)
         pg.display.update()
         tmr += 1        
         clock.tick(200)
